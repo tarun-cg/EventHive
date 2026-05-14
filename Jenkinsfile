@@ -1,17 +1,14 @@
 pipeline {
     agent any
-
     stages {
-        stage('Dummy Stage') {
-            steps {
-                echo 'This is a dummy stage running in Jenkins!'
-            }
+        stage('Checkout') {
+            steps { checkout scm }
         }
-    }
-
-    post {
-        always {
-            echo 'Pipeline execution completed.'
+        stage('Build') {
+            steps { sh './mvnw clean package' }
+        }
+        stage('Test') {
+            steps { sh './mvnw test' }
         }
     }
 }
