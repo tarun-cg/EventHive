@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eventhive
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: eventhive
+  template:
+    metadata:
+      labels:
+        app: eventhive
+    spec:
+      containers:
+      - name: eventhive
+        image: tarun-cg/eventhive:1.0
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eventhive-service
+spec:
+  selector:
+    app: eventhive
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer
