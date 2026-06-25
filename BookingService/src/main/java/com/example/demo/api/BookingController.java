@@ -54,5 +54,4 @@ public class BookingController {
 		return status;
 	}
 	
-	
 }
